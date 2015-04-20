@@ -72,7 +72,7 @@ def get_score_local(s):
         return 0
     elif s=='Bajo':
         return 0
-    elif s=='Intermedio'
+    elif s=='Intermedio':
         return 1
     elif s=='Alto':
         return 3
@@ -83,22 +83,18 @@ def get_score_visitor(s):
         return 0
     elif s==1:
         return 1
-    elif s==0
+    elif s==0:
         return 3
 def copa_ciber_dosmilquince(equipos):
     #array 1 con todos los equipos
     locales=equipos
     #array 2 con equipos como visitantes
     visitantes=equipos
-    participantes=[]
-    resultados=[]
+    resultados={}
     for l in locales:
         power_l=l.local_performance()
         for v in visitantes:
-            if l.name==v.name:
-                print 'n/a'
-            else:
-                print '************************************'
+            if not l.name==v.name:
                 print l.name+' vs '+v.name
                 power_v=v.visitor_performance()
                 #comparo el rendimiento en el partido
@@ -119,10 +115,10 @@ def copa_ciber_dosmilquince(equipos):
                 l.score=l.score+local_score
                 v.score=v.score+visitor_score
                 print '************************************'
-        resultados=resultados.update({l.name:l.score})
+        resultados.__setitem__(l.name, l.score)
 
 
-    tabla_posiciones=sorted(resultados.items(), reverse=True)
+    tabla_posiciones=sorted(resultados.items())
     print 'La tabla de posiciones es'
     print tabla_posiciones
 class Equipo:
