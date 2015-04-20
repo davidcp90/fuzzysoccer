@@ -10,77 +10,84 @@ def semantic_value(x):
     elif x==10:
         return 'Muy alto'
 def inference_rules(x,y):
+#Este metodo calculo el valor de pertenencia, en este caso el rendimiento
+#ponderado entre 2 valores
     #x muy bajo contra otros valores de y
-    if x=='Muy bajo' and y=='Muy bajo'
+    if x=='Muy bajo' and y=='Muy bajo':
         return 'Muy bajo'
-    elif x=='Muy bajo' and y=='Bajo'
+    elif x=='Muy bajo' and y=='Bajo':
         return 'Bajo'
-    elif x=='Muy bajo' and y=='Intermedio'
+    elif x=='Muy bajo' and y=='Intermedio':
         return 'Bajo'
-    elif x=='Muy bajo' and y=='Alto'
+    elif x=='Muy bajo' and y=='Alto':
         return 'Intermedio'
-    elif x=='Muy bajo' and y=='Muy alto'
+    elif x=='Muy bajo' and y=='Muy alto':
         return 'Intermedio'
     #x bajo contra otros valores de y
-    elif x=='Bajo' and y=='Muy bajo'
+    elif x=='Bajo' and y=='Muy bajo':
         return 'Bajo'
-    elif x=='Bajo' and y=='Bajo'
+    elif x=='Bajo' and y=='Bajo':
         return 'Bajo'
-    elif x=='Bajo' and y=='Intermedio'
+    elif x=='Bajo' and y=='Intermedio':
         return 'Bajo'
-    elif x=='Bajo' and y=='Alto'
+    elif x=='Bajo' and y=='Alto':
         return 'Intermedio'
-    elif x=='Bajo' and y=='Muy alto'
+    elif x=='Bajo' and y=='Muy alto':
         return 'Intermedio'
     #x intermedio contra otros valores de y
-    elif x=='Intermedio' and y=='Muy bajo'
+    elif x=='Intermedio' and y=='Muy bajo':
         return 'Bajo'
-    elif x=='Intermedio' and y=='Bajo'
+    elif x=='Intermedio' and y=='Bajo':
         return 'Bajo'
-    elif x=='Intermedio' and y=='Intermedio'
+    elif x=='Intermedio' and y=='Intermedio':
         return 'Intermedio'
-    elif x=='Intermedio' and y=='Alto'
+    elif x=='Intermedio' and y=='Alto':
         return 'Alto'
-    elif x=='Intermedio' and y=='Muy alto'
+    elif x=='Intermedio' and y=='Muy alto':
         return 'Alto'
     #x alto contra otros valores de y
-    elif x=='Alto' and y=='Muy bajo'
+    elif x=='Alto' and y=='Muy bajo':
         return 'Intermedio'
-    elif x=='Alto' and y=='Bajo'
+    elif x=='Alto' and y=='Bajo':
         return 'Intermedio'
-    elif x=='Alto' and y=='Intermedio'
+    elif x=='Alto' and y=='Intermedio':
         return 'Alto'
-    elif x=='Alto' and y=='Alto'
+    elif x=='Alto' and y=='Alto':
         return 'Alto'
-    elif x=='Alto' and y=='Muy alto'
+    elif x=='Alto' and y=='Muy alto':
         return 'Muy alto'
     #x Muy alto contra otros valores de y
-    elif x=='Muy alto' and y=='Muy bajo'
+    elif x=='Muy alto' and y=='Muy bajo':
         return 'Alto'
-    elif x=='Muy alto' and y=='Bajo'
+    elif x=='Muy alto' and y=='Bajo':
         return 'Alto'
-    elif x=='Muy alto' and y=='Intermedio'
+    elif x=='Muy alto' and y=='Intermedio':
         return 'Alto'
-    elif x=='Muy alto' and y=='Alto'
+    elif x=='Muy alto' and y=='Alto':
         return 'Muy alto'
-    elif x=='Muy alto' and y=='Muy alto'
+    elif x=='Muy alto' and y=='Muy alto':
         return 'Muy alto'
 class Equipo:
     def assign_attributes(self,attributes):
         self.name=attributes[4]
-        self.tecnica=attributes[0]
-        self.rend_local=attributes[1]
-        self.rend_visit=attributes[2]
-        self.tactica=attributes[3]
-        #semantic values
+        #describe la capacidad tecnica del equipo
         self.tecnica_s=semantic_value(attributes[0])
+        #describe el promedio de su rendimiento como local
         self.rend_local_s=semantic_value(attributes[1])
+         #describe el promedio de su rendimiento como visitante
         self.rend_visit_s=semantic_value(attributes[2])
+        #describe la capacidad tactica del equipo
         self.tactica_s=semantic_value(attributes[3])
-
     def local_performance(self):
-        internal_ability=self.tecnica+self.tactica
-        rend_local=self.rend_local
+        internal_ability=inference_rules(self.tecnica_s,self.tactica_s)
+        rend_local=self.rend_local_s
+        local_p=inference_rules(internal_ability,rend_local)
+        return local_p
+    def visitor_performance(self):
+        internal_ability=inference_rules(self.tecnica_s,self.tactica_s)
+        rend_local=self.rend_local_s
+        visit_p=inference_rules(internal_ability,rend_local)
+        return visit_p
 
 
 a=Equipo()
@@ -93,7 +100,7 @@ b.assign_attributes([7,5,5,9,'Deportivo Edwins'])
 c.assign_attributes([7,8,3,7,'Atletico Polainas'])
 d.assign_attributes([2,6,4,8,'Club Jotos'])
 e.assign_attributes([2,3,4,2,'Colegio Robertas'])
-print a.tecnica_s
+
 
 
 
